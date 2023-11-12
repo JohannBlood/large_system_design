@@ -5,7 +5,7 @@ template <typename... Ts>
 struct are_same;
 
 template <typename T, typename... Ts>
-struct are_same<T, Ts...> : std::integral_constant<bool, (std::is_same_v<T, Ts> && ...)> {};
+struct are_same<T, Ts...> : std::integral_constant<bool, (std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, std::remove_cv_t<std::remove_reference_t<Ts>>> && ...)> {};
 
 template <>
 struct are_same<> : std::true_type {};
