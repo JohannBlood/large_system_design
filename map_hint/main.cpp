@@ -5,21 +5,21 @@
 
 // Вставка элементов, упорядоченных по возрастанию ключа, подсказка - итератор, указывающий на конец контейнера.
 void test_1(std::ofstream& outFile){
-    std::map<int, std::string> myMap;
-
     // Пример 1: Вставка элементов с использованием hint
+    std::map<int, std::string> myMap1;
     auto start1 = std::chrono::high_resolution_clock::now();
-    auto hint = myMap.begin();
+    auto hint = myMap1.begin();
     for (int i = 0; i < 100000; ++i) {
-        myMap.insert(hint, std::make_pair(i, "value"));
+        myMap1.insert(hint, std::make_pair(i, "value"));
     }
     auto end1 = std::chrono::high_resolution_clock::now();
     outFile << "Тест 1 (с подсказкой): " << std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1).count() << " мкс" << std::endl;
 
     // Пример 2: Вставка элементов без использования hint
+    std::map<int, std::string> myMap2;
     auto start2 = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < 100000; ++i) {
-        myMap.insert(std::make_pair(i, "value"));
+        myMap2.insert(std::make_pair(i, "value"));
     }
     auto end2 = std::chrono::high_resolution_clock::now();
     outFile << "Тест 1 (без подсказкой): " << std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2).count() << " мкс" << std::endl;
@@ -27,9 +27,8 @@ void test_1(std::ofstream& outFile){
 
 // Вставка элементов, упорядоченных по убыванию ключа, подсказка - итератор, указывающий на начало контейнера.
 void test_2(std::ofstream& outFile){
-    std::map<int, std::string> myMap1;
-
     // Пример 1: Вставка элементов с использованием hint
+    std::map<int, std::string> myMap1;
     auto start1 = std::chrono::high_resolution_clock::now();
     for (int i = 100000; i > 0; --i) {
         auto hint = myMap1.begin();
@@ -39,9 +38,10 @@ void test_2(std::ofstream& outFile){
     outFile << "Тест 2 (с подсказкой): " << std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1).count() << " мкс" << std::endl;
 
     // Пример 2: Вставка элементов без использования hint
+    std::map<int, std::string> myMap2;
     auto start2 = std::chrono::high_resolution_clock::now();
     for (int i = 100000; i > 0; --i) {
-        myMap1.insert(std::make_pair(i, "value"));
+        myMap2.insert(std::make_pair(i, "value"));
     }
     auto end2 = std::chrono::high_resolution_clock::now();
     outFile << "Тест 2 (без подсказкой): " << std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2).count() << " мкс" << std::endl;
